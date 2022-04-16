@@ -1,12 +1,9 @@
+This error may occur when using docker on mac:
+"pull access denied for public.ecr.aws/lambda/python, repository does not exist or may require 'docker login': denied: Your authorization token has expired. Reauthenticate and try again."
 
-
-
-Logout when this error occurs: "pull access denied for public.ecr.aws/lambda/python, repository does not exist or may require 'docker login': denied: Your authorization token has expired. Reauthenticate and try again."
-
+Steps to  solve it:
 1. docker logout public.ecr.aws
 2. aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
-
-
 
 If you use the docker desktop on Mac OS/Windows, You can try to disable buildkit in the docker engine JSON configuration:
 
