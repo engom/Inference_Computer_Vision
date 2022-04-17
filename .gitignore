@@ -1,4 +1,6 @@
+inference-lambda
 model.h5
-model_predict.ipynb
 .DS_Store
 .ipynb_checkpoints
+.gitignore
+model_predict.ipynb

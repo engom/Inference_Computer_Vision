@@ -6,12 +6,12 @@ import json
 import urllib.parse
 import boto3
 
-# predictor function
+# predicter function
 def predict_saved_model(img_path, model_path):
     '''
     Takes the saved model to make an inference on a given image
     '''
-    #model = tf.saved_model.load('models/my_saved_model')
+    # upload the saved and trained model
     model = tf.keras.models.load_model(model_path)
     image_size = (180, 180)
     img = keras.preprocessing.image.load_img(
@@ -22,10 +22,7 @@ def predict_saved_model(img_path, model_path):
 
     predictions = model.predict(img_array)
     score = predictions[0]
-    print(
-        "This image is %.2f percent cat and %.2f percent dog."
-        % (100 * (1 - score), 100 * score)
-        )
+    print(f'This image {img_path} is {100*(1-score)} percent cat and {100*score} percent dog.')
 
     return {"cat": str((100 * (1 - score))[0]), "dog": str((100 * score)[0])}
 
@@ -33,7 +30,7 @@ def predict_saved_model(img_path, model_path):
 # app handler
 def handler(event, context):
     # Set up some variables we'll need
-    print("starting ....")
+    print("Prediction in progress ...")
     image_path = "/tmp/image.jpg"
     model_path = "/tmp/model.h5"
 
